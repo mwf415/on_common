@@ -1,7 +1,7 @@
 package cn.onlov.utils.module.vo;
 
 
-import cn.onlov.evaluate.util.module.annotation.CSVField;
+import cn.onlov.utils.module.annotation.CSVField;
 
 /**
  * @Description:  

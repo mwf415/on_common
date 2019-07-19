@@ -13,12 +13,13 @@ import java.util.Map;
 
 import cn.onlov.utils.module.annotation.CSVField;
 import cn.onlov.utils.module.vo.TestVO;
-import org.apache.log4j.Logger;
 
 import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
 import com.google.common.collect.Lists;
- 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @Description: CSV工具类 
  * @author zhangxiaowei
@@ -27,7 +28,7 @@ import com.google.common.collect.Lists;
 public final class CSVUtils {
     
     /** 日志对象 **/
-    private static final Logger logger = Logger.getLogger(CSVUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(CSVUtils.class);
  
     /**
      * @Description: 导出CSV文件

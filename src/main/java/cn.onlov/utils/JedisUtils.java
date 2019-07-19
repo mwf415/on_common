@@ -1,6 +1,7 @@
 package cn.onlov.utils;
 
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class JedisUtils {
     /** 缓存生存时间 */
     private final int expire = 60000;
 
-//    private static String host = ConfigUtils.getProperty("spring.redis.host", "127.0.0.1");
+    //    private static String host = ConfigUtils.getProperty("spring.redis.host", "127.0.0.1");
     private static String host = "127.0.0.1";
 
     private static int port = 6379;
@@ -94,7 +95,7 @@ public class JedisUtils {
 
     /**
      * 从jedis连接池中获取获取jedis对象
-     * 
+     *
      * @return
      */
     public Jedis getJedis() {
@@ -127,7 +128,7 @@ public class JedisUtils {
 
     /**
      * 获取JedisUtil实例
-     * 
+     *
      * @return
      */
     public static JedisUtils getInstance() {
@@ -136,7 +137,7 @@ public class JedisUtils {
 
     /**
      * 回收jedis
-     * 
+     *
      * @param jedis
      */
     public void returnJedis(Jedis jedis) {
@@ -147,7 +148,7 @@ public class JedisUtils {
 
     /**
      * 设置过期时间
-     * 
+     *
      * @author ruan 2013-4-11
      * @param key
      * @param seconds
@@ -166,7 +167,7 @@ public class JedisUtils {
 
     /**
      * 设置默认过期时间
-     * 
+     *
      * @author ruan 2013-4-11
      * @param key
      */
@@ -193,7 +194,7 @@ public class JedisUtils {
 
         /**
          * 更改key
-         * 
+         *
          * @param String
          *            oldkey
          * @param String
@@ -206,7 +207,7 @@ public class JedisUtils {
 
         /**
          * 更改key,仅当新key不存在时才执行
-         * 
+         *
          * @param String
          *            oldkey
          * @param String
@@ -226,7 +227,7 @@ public class JedisUtils {
 
         /**
          * 更改key
-         * 
+         *
          * @param String
          *            oldkey
          * @param String
@@ -246,7 +247,7 @@ public class JedisUtils {
 
         /**
          * 设置key的过期时间，以秒为单位
-         * 
+         *
          * @param String
          *            key
          * @param 时间,已秒为单位
@@ -265,7 +266,7 @@ public class JedisUtils {
 
         /**
          * 设置key的过期时间,它是距历元（即格林威治标准时间 1970 年 1 月 1 日的 00:00:00，格里高利历）的偏移量。
-         * 
+         *
          * @param String
          *            key
          * @param 时间,已秒为单位
@@ -284,7 +285,7 @@ public class JedisUtils {
 
         /**
          * 查询key的过期时间
-         * 
+         *
          * @param String
          *            key
          * @return 以秒为单位的时间表示
@@ -303,7 +304,7 @@ public class JedisUtils {
 
         /**
          * 取消对key过期时间的设置
-         * 
+         *
          * @param key
          * @return 影响的记录数
          */
@@ -320,7 +321,7 @@ public class JedisUtils {
 
         /**
          * 删除keys对应的记录,可以是多个key
-         * 
+         *
          * @param String
          *            ... keys
          * @return 删除的记录数
@@ -338,7 +339,7 @@ public class JedisUtils {
 
         /**
          * 删除keys对应的记录,可以是多个key
-         * 
+         *
          * @param String
          *            .. keys
          * @return 删除的记录数
@@ -356,7 +357,7 @@ public class JedisUtils {
 
         /**
          * 判断key是否存在
-         * 
+         *
          * @param String
          *            key
          * @return boolean
@@ -375,7 +376,7 @@ public class JedisUtils {
 
         /**
          * 对List,Set,SortSet进行排序,如果集合数据较大应避免使用这个方法
-         * 
+         *
          * @param String
          *            key
          * @return List<String> 集合的全部记录
@@ -394,7 +395,7 @@ public class JedisUtils {
 
         /**
          * 对List,Set,SortSet进行排序或limit
-         * 
+         *
          * @param String
          *            key
          * @param SortingParams
@@ -415,7 +416,7 @@ public class JedisUtils {
 
         /**
          * 返回指定key存储的类型
-         * 
+         *
          * @param String
          *            key
          * @return String string|list|set|zset|hash
@@ -434,7 +435,7 @@ public class JedisUtils {
 
         /**
          * 查找所有匹配给定的模式的键
-         * 
+         *
          * @param String
          *            key的表达式,*表示多个，？表示一个
          */
@@ -455,7 +456,7 @@ public class JedisUtils {
 
         /**
          * 向Set添加一条记录，如果member已存在返回0,否则返回1
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -486,7 +487,7 @@ public class JedisUtils {
 
         /**
          * 获取给定key中元素个数
-         * 
+         *
          * @param String
          *            key
          * @return 元素个数
@@ -505,7 +506,7 @@ public class JedisUtils {
 
         /**
          * 返回从第一组和所有的给定集合之间的差异的成员
-         * 
+         *
          * @param String
          *            ... keys
          * @return 差异的成员集合
@@ -523,7 +524,7 @@ public class JedisUtils {
 
         /**
          * 这个命令等于sdiff,但返回的不是结果集,而是将结果集存储在新的集合中，如果目标已存在，则覆盖。
-         * 
+         *
          * @param String
          *            newkey 新结果集的key
          * @param String
@@ -543,7 +544,7 @@ public class JedisUtils {
 
         /**
          * 返回给定集合交集的成员,如果其中一个集合为不存在或为空，则返回空Set
-         * 
+         *
          * @param String
          *            ... keys
          * @return 交集成员的集合
@@ -561,7 +562,7 @@ public class JedisUtils {
 
         /**
          * 这个命令等于sinter,但返回的不是结果集,而是将结果集存储在新的集合中，如果目标已存在，则覆盖。
-         * 
+         *
          * @param String
          *            newkey 新结果集的key
          * @param String
@@ -581,7 +582,7 @@ public class JedisUtils {
 
         /**
          * 确定一个给定的值是否存在
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -602,7 +603,7 @@ public class JedisUtils {
 
         /**
          * 返回集合中的所有成员
-         * 
+         *
          * @param String
          *            key
          * @return 成员集合
@@ -635,7 +636,7 @@ public class JedisUtils {
          * 将成员从源集合移出放入目标集合 <br/>
          * 如果源集合不存在或不包哈指定成员，不进行任何操作，返回0<br/>
          * 否则该成员从源集合上删除，并添加到目标集合，如果目标集合中成员已存在，则只在源集合进行删除
-         * 
+         *
          * @param String
          *            srckey 源集合
          * @param String
@@ -657,7 +658,7 @@ public class JedisUtils {
 
         /**
          * 从集合中删除成员
-         * 
+         *
          * @param String
          *            key
          * @return 被删除的成员
@@ -675,7 +676,7 @@ public class JedisUtils {
 
         /**
          * 从集合中删除指定成员
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -695,7 +696,7 @@ public class JedisUtils {
 
         /**
          * 合并多个集合并返回合并后的结果，合并后的结果集合并不保存<br/>
-         * 
+         *
          * @param String
          *            ... keys
          * @return 合并后的结果集合
@@ -714,7 +715,7 @@ public class JedisUtils {
 
         /**
          * 合并多个集合并将合并后的结果集保存在指定的新集合中，如果新集合已经存在则覆盖
-         * 
+         *
          * @param String
          *            newkey 新集合的key
          * @param String
@@ -737,7 +738,7 @@ public class JedisUtils {
 
         /**
          * 向集合中增加一条记录,如果这个值已存在，这个值对应的权重将被置为新的权重
-         * 
+         *
          * @param String
          *            key
          * @param double
@@ -770,7 +771,7 @@ public class JedisUtils {
 
         /**
          * 获取集合中元素的数量
-         * 
+         *
          * @param String
          *            key
          * @return 如果返回0则集合不存在
@@ -789,7 +790,7 @@ public class JedisUtils {
 
         /**
          * 获取指定权重区间内集合的数量
-         * 
+         *
          * @param String
          *            key
          * @param double
@@ -811,7 +812,7 @@ public class JedisUtils {
 
         /**
          * 获得set的长度
-         * 
+         *
          * @param key
          * @return
          */
@@ -828,7 +829,7 @@ public class JedisUtils {
 
         /**
          * 权重增加给定值，如果给定的member已存在
-         * 
+         *
          * @param String
          *            key
          * @param double
@@ -850,7 +851,7 @@ public class JedisUtils {
 
         /**
          * 返回指定位置的集合元素,0为第一个元素，-1为最后一个元素
-         * 
+         *
          * @param String
          *            key
          * @param int
@@ -873,7 +874,7 @@ public class JedisUtils {
 
         /**
          * 返回指定权重区间的元素集合
-         * 
+         *
          * @param String
          *            key
          * @param double
@@ -896,7 +897,7 @@ public class JedisUtils {
 
         /**
          * 获取指定值在集合中的位置，集合排序从低到高
-         * 
+         *
          * @see zrevrank
          * @param String
          *            key
@@ -918,7 +919,7 @@ public class JedisUtils {
 
         /**
          * 获取指定值在集合中的位置，集合排序从高到低
-         * 
+         *
          * @see zrank
          * @param String
          *            key
@@ -940,7 +941,7 @@ public class JedisUtils {
 
         /**
          * 从集合中删除成员
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -960,7 +961,7 @@ public class JedisUtils {
 
         /**
          * 删除
-         * 
+         *
          * @param key
          * @return
          */
@@ -977,7 +978,7 @@ public class JedisUtils {
 
         /**
          * 删除给定位置区间的元素
-         * 
+         *
          * @param String
          *            key
          * @param int
@@ -999,7 +1000,7 @@ public class JedisUtils {
 
         /**
          * 删除给定权重区间的元素
-         * 
+         *
          * @param String
          *            key
          * @param double
@@ -1021,7 +1022,7 @@ public class JedisUtils {
 
         /**
          * 获取给定区间的元素，原始按照权重由高到低排序
-         * 
+         *
          * @param String
          *            key
          * @param int
@@ -1044,7 +1045,7 @@ public class JedisUtils {
 
         /**
          * 获取给定值在集合中的权重
-         * 
+         *
          * @param String
          *            key
          * @param memeber
@@ -1069,7 +1070,7 @@ public class JedisUtils {
 
         /**
          * 从hash中删除指定的存储
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1100,7 +1101,7 @@ public class JedisUtils {
 
         /**
          * 测试hash中指定的存储是否存在
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1121,7 +1122,7 @@ public class JedisUtils {
 
         /**
          * 返回hash中指定存储位置的值
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1154,7 +1155,7 @@ public class JedisUtils {
 
         /**
          * 以Map的形式返回hash中的存储和值
-         * 
+         *
          * @param String
          *            key
          * @return Map<Strinig,String>
@@ -1173,7 +1174,7 @@ public class JedisUtils {
 
         /**
          * 添加一个对应关系
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1206,7 +1207,7 @@ public class JedisUtils {
 
         /**
          * 添加对应关系，只有在fieid不存在时才执行
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1228,7 +1229,7 @@ public class JedisUtils {
 
         /**
          * 获取hash中value的集合
-         * 
+         *
          * @param String
          *            key
          * @return List<String>
@@ -1247,7 +1248,7 @@ public class JedisUtils {
 
         /**
          * 在指定的存储位置加上指定的数字，存储位置的值必须可转为数字类型
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1269,7 +1270,7 @@ public class JedisUtils {
 
         /**
          * 返回指定hash中的所有存储名字,类似Map中的keySet方法
-         * 
+         *
          * @param String
          *            key
          * @return Set<String> 存储名称的集合
@@ -1288,7 +1289,7 @@ public class JedisUtils {
 
         /**
          * 获取hash中存储的个数，类似Map中size方法
-         * 
+         *
          * @param String
          *            key
          * @return long 存储的个数
@@ -1307,7 +1308,7 @@ public class JedisUtils {
 
         /**
          * 根据多个key，获取对应的value，返回List,如果指定的key不存在,List对应位置为null
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1340,7 +1341,7 @@ public class JedisUtils {
 
         /**
          * 添加对应关系，如果对应关系已存在，则覆盖
-         * 
+         *
          * @param Strin
          *            key
          * @param Map
@@ -1360,7 +1361,7 @@ public class JedisUtils {
 
         /**
          * 添加对应关系，如果对应关系已存在，则覆盖
-         * 
+         *
          * @param Strin
          *            key
          * @param Map
@@ -1384,7 +1385,7 @@ public class JedisUtils {
     public class Strings {
         /**
          * 根据key获取记录
-         * 
+         *
          * @param String
          *            key
          * @return 值
@@ -1403,7 +1404,7 @@ public class JedisUtils {
 
         /**
          * 根据key获取记录
-         * 
+         *
          * @param byte[]
          *            key
          * @return 值
@@ -1422,7 +1423,7 @@ public class JedisUtils {
 
         /**
          * 添加有过期时间的记录
-         * 
+         *
          * @param String
          *            key
          * @param int
@@ -1444,7 +1445,7 @@ public class JedisUtils {
 
         /**
          * 添加有过期时间的记录
-         * 
+         *
          * @param String
          *            key
          * @param int
@@ -1466,7 +1467,7 @@ public class JedisUtils {
 
         /**
          * 添加一条记录，仅当给定的key不存在时才插入
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1486,7 +1487,7 @@ public class JedisUtils {
 
         /**
          * 添加记录,如果记录已存在将覆盖原有的value
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1499,7 +1500,7 @@ public class JedisUtils {
 
         /**
          * 添加记录,如果记录已存在将覆盖原有的value
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1512,7 +1513,7 @@ public class JedisUtils {
 
         /**
          * 添加记录,如果记录已存在将覆盖原有的value
-         * 
+         *
          * @param byte[]
          *            key
          * @param byte[]
@@ -1534,7 +1535,7 @@ public class JedisUtils {
          * 从指定位置开始插入数据，插入的数据会覆盖指定位置以后的数据<br/>
          * 例:String str1="123456789";<br/>
          * 对str1操作后setRange(key,4,0000)，str1="123400009";
-         * 
+         *
          * @param String
          *            key
          * @param long
@@ -1556,7 +1557,7 @@ public class JedisUtils {
 
         /**
          * 在指定的key中追加value
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1576,7 +1577,7 @@ public class JedisUtils {
 
         /**
          * 将key对应的value减去指定的值，只有value可以转为数字时该方法才可用
-         * 
+         *
          * @param String
          *            key
          * @param long
@@ -1597,7 +1598,7 @@ public class JedisUtils {
         /**
          * <b>可以作为获取唯一id的方法</b><br/>
          * 将key对应的value加上指定的值，只有value可以转为数字时该方法才可用
-         * 
+         *
          * @param String
          *            key
          * @param long
@@ -1617,7 +1618,7 @@ public class JedisUtils {
 
         /**
          * 对指定key对应的value进行截取
-         * 
+         *
          * @param String
          *            key
          * @param long
@@ -1641,7 +1642,7 @@ public class JedisUtils {
         /**
          * 获取并设置指定key对应的value<br/>
          * 如果key存在返回之前的value,否则返回null
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1661,7 +1662,7 @@ public class JedisUtils {
 
         /**
          * 批量获取记录,如果指定的key不存在返回List的对应位置将是null
-         * 
+         *
          * @param String
          *            keys
          * @return List<String> 值得集合
@@ -1679,7 +1680,7 @@ public class JedisUtils {
 
         /**
          * 批量存储记录
-         * 
+         *
          * @param String
          *            keysvalues 例:keysvalues="key1","value1","key2","value2";
          * @return String 状态码
@@ -1697,7 +1698,7 @@ public class JedisUtils {
 
         /**
          * 获取key对应的值的长度
-         * 
+         *
          * @param String
          *            key
          * @return value值得长度
@@ -1718,7 +1719,7 @@ public class JedisUtils {
     public class Lists {
         /**
          * List长度
-         * 
+         *
          * @param String
          *            key
          * @return 长度
@@ -1729,7 +1730,7 @@ public class JedisUtils {
 
         /**
          * List长度
-         * 
+         *
          * @param byte[]
          *            key
          * @return 长度
@@ -1748,7 +1749,7 @@ public class JedisUtils {
 
         /**
          * 覆盖操作,将覆盖List中指定位置的值
-         * 
+         *
          * @param byte[]
          *            key
          * @param int
@@ -1770,7 +1771,7 @@ public class JedisUtils {
 
         /**
          * 覆盖操作,将覆盖List中指定位置的值
-         * 
+         *
          * @param key
          * @param int
          *            index 位置
@@ -1784,7 +1785,7 @@ public class JedisUtils {
 
         /**
          * 在value的相对位置插入记录
-         * 
+         *
          * @param key
          * @param LIST_POSITION
          *            前面插入或后面插入
@@ -1800,7 +1801,7 @@ public class JedisUtils {
 
         /**
          * 在指定位置插入记录
-         * 
+         *
          * @param String
          *            key
          * @param LIST_POSITION
@@ -1824,7 +1825,7 @@ public class JedisUtils {
 
         /**
          * 获取List中指定位置的值
-         * 
+         *
          * @param String
          *            key
          * @param int
@@ -1837,7 +1838,7 @@ public class JedisUtils {
 
         /**
          * 获取List中指定位置的值
-         * 
+         *
          * @param byte[]
          *            key
          * @param int
@@ -1858,7 +1859,7 @@ public class JedisUtils {
 
         /**
          * 将List中的第一条记录移出List
-         * 
+         *
          * @param String
          *            key
          * @return 移出的记录
@@ -1869,7 +1870,7 @@ public class JedisUtils {
 
         /**
          * 将List中的第一条记录移出List
-         * 
+         *
          * @param byte[]
          *            key
          * @return 移出的记录
@@ -1887,7 +1888,7 @@ public class JedisUtils {
 
         /**
          * 将List中最后第一条记录移出List
-         * 
+         *
          * @param byte[]
          *            key
          * @return 移出的记录
@@ -1905,7 +1906,7 @@ public class JedisUtils {
 
         /**
          * 向List尾部追加记录
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1918,7 +1919,7 @@ public class JedisUtils {
 
         /**
          * 向List头部追加记录
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1938,7 +1939,7 @@ public class JedisUtils {
 
         /**
          * 向List头部追加记录
-         * 
+         *
          * @param String
          *            key
          * @param String
@@ -1958,7 +1959,7 @@ public class JedisUtils {
 
         /**
          * 向List中追加记录
-         * 
+         *
          * @param byte[]
          *            key
          * @param byte[]
@@ -1978,7 +1979,7 @@ public class JedisUtils {
 
         /**
          * 获取指定范围的记录，可以做为分页使用
-         * 
+         *
          * @param String
          *            key
          * @param long
@@ -2001,7 +2002,7 @@ public class JedisUtils {
 
         /**
          * 获取指定范围的记录，可以做为分页使用
-         * 
+         *
          * @param byte[]
          *            key
          * @param int
@@ -2024,7 +2025,7 @@ public class JedisUtils {
 
         /**
          * 删除List中c条记录，被删除的记录值为value
-         * 
+         *
          * @param byte[]
          *            key
          * @param int
@@ -2046,7 +2047,7 @@ public class JedisUtils {
 
         /**
          * 删除List中c条记录，被删除的记录值为value
-         * 
+         *
          * @param String
          *            key
          * @param int
@@ -2061,7 +2062,7 @@ public class JedisUtils {
 
         /**
          * 算是删除吧，只保留start与end之间的记录
-         * 
+         *
          * @param byte[]
          *            key
          * @param int
@@ -2083,7 +2084,7 @@ public class JedisUtils {
 
         /**
          * 算是删除吧，只保留start与end之间的记录
-         * 
+         *
          * @param String
          *            key
          * @param int

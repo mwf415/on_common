@@ -3,11 +3,11 @@ package cn.onlov.utils;
 
 import java.util.Date;
 
-public class MyStringUtils  {
+public class OnStringUtils {
 
     public static void main(String[] args) {
         String aa ="";
-        MyStringUtils.isNotEmpty(aa);
+        OnStringUtils.isNotEmpty(aa);
     }
 
     public static boolean isNotEmpty(String cs) {

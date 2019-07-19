@@ -1,6 +1,7 @@
 package cn.onlov.utils.module.vo;
 
-import cn.onlov.evaluate.util.module.annotation.ExcelField;
+
+import cn.onlov.utils.module.annotation.ExcelField;
 
 public class UserVO {
 
