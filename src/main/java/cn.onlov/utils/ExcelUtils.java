@@ -150,13 +150,6 @@ public final class ExcelUtils {
 
         Class<? extends Object> clazz = list.get(0).getClass();
         Field[] allFields = clazz.getDeclaredFields();// 得到所有定义字段
-        Field[] declaredFields = clazz.getDeclaredFields();
-        for (Field declaredField : declaredFields) {
-            Annotation[] annotations = declaredField.getAnnotations();
-            System.out.println(11111111111L);
-        }
-
-
         List<Field> fields = new ArrayList<Field>();
         Map<String, Field> fieldsMap = Maps.newHashMap();
         // 得到所有field并存放到一个list中.
@@ -181,7 +174,7 @@ public final class ExcelUtils {
             sheetSize = 65536;
         }
         double sheetNo = Math.ceil(list.size() / sheetSize);// 取出一共有多少个sheet.
-        for (int index = 0; index <= sheetNo; index++) {
+        for (int index = 0; index < sheetNo; index++) {
             XSSFSheet sheet = workbook.createSheet();// 产生工作表对象
             workbook.setSheetName(index, sheetName + index);// 设置工作表的名称.
             XSSFRow row;
