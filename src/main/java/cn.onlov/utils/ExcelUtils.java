@@ -1,9 +1,7 @@
 package cn.onlov.utils;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import cn.onlov.utils.module.annotation.ExcelField;
+import cn.onlov.utils.module.vo.ScoreVo;
+import cn.onlov.utils.module.vo.UserVO;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.ss.usermodel.Cell;
@@ -150,6 +150,13 @@ public final class ExcelUtils {
 
         Class<? extends Object> clazz = list.get(0).getClass();
         Field[] allFields = clazz.getDeclaredFields();// 得到所有定义字段
+        Field[] declaredFields = clazz.getDeclaredFields();
+        for (Field declaredField : declaredFields) {
+            Annotation[] annotations = declaredField.getAnnotations();
+            System.out.println(11111111111L);
+        }
+
+
         List<Field> fields = new ArrayList<Field>();
         Map<String, Field> fieldsMap = Maps.newHashMap();
         // 得到所有field并存放到一个list中.
@@ -328,7 +335,7 @@ public final class ExcelUtils {
 
     /**
      * 将EXCEL中A,B,C,D,E列映射成0,1,2,3
-     * 
+     *
      * @param col
      */
     public static int getExcelCol(String col) {
@@ -344,7 +351,7 @@ public final class ExcelUtils {
 
     /**
      * 设置单元格上提示
-     * 
+     *
      * @param sheet
      *            要设置的sheet.
      * @param promptTitle
@@ -378,7 +385,7 @@ public final class ExcelUtils {
 
     /**
      * 设置某些列的值只能输入预制的数据,显示下拉框.
-     * 
+     *
      * @param sheet
      *            要设置的sheet.
      * @param textlist
@@ -407,26 +414,11 @@ public final class ExcelUtils {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        // List<UserVO> list = Lists.newArrayList();
-        // UserVO user1 = new UserVO();
-        // user1.setId(1L);
-        // user1.setName("张三");
-        // user1.setNation("汉族");
-        // user1.setPhone("18323111111");
-        // user1.setSex("男");
-        // user1.setPassword("123");
-        // UserVO user2 = new UserVO();
-        // user2.setId(3L);
-        // user2.setName("李四");
-        // user2.setNation("回族");
-        // user2.setPhone("18323111112");
-        // user2.setSex("");
-        // user2.setPassword("1233");
-        // list.add(user1);
-        // list.add(user2);
-        // FileOutputStream fileOutputStream = new FileOutputStream(new
-        // File("D:\\upload\\export_report.xlsx"));
-        // ExcelUtils.exportExcel(list, "导出报表", 100, fileOutputStream);
+         List<ScoreVo> list = Lists.newArrayList();
+        ScoreVo user1 = new ScoreVo();
+
+         FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\upload\\export_report.xlsx"));
+         ExcelUtils.exportExcel(list, "导出报表", 100, fileOutputStream);
     }
 
 }
